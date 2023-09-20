@@ -24,10 +24,10 @@
 		"readonlyMessage",
 		"treeViewMarkdownMessage"
 	],
-	"version": "0.70.0",
+	"version": "0.72.0",
 	"publisher": "GitHub",
 	"engines": {
-		"vscode": "^1.81.0"
+		"vscode": "^1.83.0"
 	},
 	"categories": [
 		"Other"
@@ -869,7 +869,8 @@
 				"command": "pr.editComment",
 				"title": "%command.pr.editComment.title%",
 				"category": "%command.pull.request.category%",
-				"icon": "$(edit)"
+				"icon": "$(edit)",
+				"enablement": "!(comment =~ /temporary/)"
 			},
 			{
 				"command": "pr.cancelEditComment",
@@ -886,7 +887,8 @@
 				"command": "pr.deleteComment",
 				"title": "%command.pr.deleteComment.title%",
 				"category": "%command.pull.request.category%",
-				"icon": "$(trash)"
+				"icon": "$(trash)",
+				"enablement": "!(comment =~ /temporary/)"
 			},
 			{
 				"command": "pr.resolveReviewThread",
@@ -968,7 +970,8 @@
 				"command": "pr.copyCommentLink",
 				"title": "%command.pr.copyCommentLink.title%",
 				"category": "%command.pull.request.category%",
-				"icon": "$(copy)"
+				"icon": "$(copy)",
+				"enablement": "!(comment =~ /temporary/)"
 			},
 			{
 				"command": "pr.applySuggestion",
@@ -2245,8 +2248,13 @@
 			],
 			"comments/commentThread/title": [
 				{
+					"command": "pr.refreshComments",
+					"group": "0_refresh@0",
+					"when": "commentController =~ /^github-(browse|review)/"
+				},
+				{
 					"command": "pr.collapseAllComments",
-					"group": "collapse@0",
+					"group": "1_collapse@0",
 					"when": "commentController =~ /^github-(browse|review)/"
 				}
 			],
